@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: prize-service
+  labels:
+    app: prize-service
+spec:
+  type: ClusterIP
+  selector:
+    app: prize-service
+  ports:
+    - name: http
+      port: 4004
+      targetPort: 4004
+      protocol: TCP

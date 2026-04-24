@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-service
+  labels:
+    app: auth-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth-service
+  template:
+    metadata:
+      labels:
+        app: auth-service
+    spec:
+      containers:
+        - name: auth-service
+          image: auth-service
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 4001
+          env:
+            - name: PORT
+              value: "4001"
+            - name: MONGO_URI
+              value: mongodb://mongodb:27017/zenith_auth
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: zenith-auth
+                  key: JWT_SECRET
+          readinessProbe:
+            tcpSocket:
+              port: 4001
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            tcpSocket:
+              port: 4001
+            initialDelaySeconds: 15
+            periodSeconds: 20

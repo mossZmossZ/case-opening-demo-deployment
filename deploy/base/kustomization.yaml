@@ -1,0 +1,19 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - namespace.yaml
+  - client-deployment.yaml
+  - client-service.yaml
+  - auth-service-deployment.yaml
+  - auth-service-service.yaml
+  - game-service-deployment.yaml
+  - game-service-service.yaml
+  - admin-service-deployment.yaml
+  - admin-service-service.yaml
+  - prize-service-deployment.yaml
+  - prize-service-service.yaml
+  - mongodb-statefulset.yaml
+  - mongodb-service.yaml
+  - redis-statefulset.yaml
+  - redis-service.yaml

@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prize-service
+  labels:
+    app: prize-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prize-service
+  template:
+    metadata:
+      labels:
+        app: prize-service
+    spec:
+      containers:
+        - name: prize-service
+          image: prize-service
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 4004
+          env:
+            - name: PORT
+              value: "4004"
+            - name: MONGO_URI
+              value: mongodb://mongodb:27017/zenith_prize
+            - name: REDIS_URL
+              value: redis://redis:6379
+          readinessProbe:
+            tcpSocket:
+              port: 4004
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            tcpSocket:
+              port: 4004
+            initialDelaySeconds: 15
+            periodSeconds: 20

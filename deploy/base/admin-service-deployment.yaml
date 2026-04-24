@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: admin-service
+  labels:
+    app: admin-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: admin-service
+  template:
+    metadata:
+      labels:
+        app: admin-service
+    spec:
+      containers:
+        - name: admin-service
+          image: admin-service
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 4003
+          env:
+            - name: PORT
+              value: "4003"
+            - name: AUTH_SERVICE_URL
+              value: http://auth-service:4001
+            - name: GAME_SERVICE_URL
+              value: http://game-service:4002
+            - name: PRIZE_SERVICE_URL
+              value: http://prize-service:4004
+          envFrom:
+            - secretRef:
+                name: zenith-s3
+                optional: true
+          readinessProbe:
+            tcpSocket:
+              port: 4003
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            tcpSocket:
+              port: 4003
+            initialDelaySeconds: 15
+            periodSeconds: 20

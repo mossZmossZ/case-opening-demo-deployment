@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: game-service
+  labels:
+    app: game-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: game-service
+  template:
+    metadata:
+      labels:
+        app: game-service
+    spec:
+      containers:
+        - name: game-service
+          image: game-service
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 4002
+          env:
+            - name: PORT
+              value: "4002"
+            - name: MONGO_URI
+              value: mongodb://mongodb:27017/zenith_game
+            - name: REDIS_URL
+              value: redis://redis:6379
+            - name: PRIZE_SERVICE_URL
+              value: http://prize-service:4004
+          readinessProbe:
+            tcpSocket:
+              port: 4002
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            tcpSocket:
+              port: 4002
+            initialDelaySeconds: 15
+            periodSeconds: 20
