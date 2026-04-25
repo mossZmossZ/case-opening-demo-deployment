@@ -4,25 +4,25 @@ kind: Kustomization
 namespace: demo-nkp-dx96j
 
 resources:
-  - ../../base
+- ../../base
 
 # Single edit point for image tags.
 # CI runs: `kustomize edit set image <service>=<full-ref>` — which updates the
 # matching entry below. Keys (`name:`) must match the base Deployment image
 # names AND the `service` field in the app repo's image-refs.json.
 images:
-  - name: client
-    newName: docker.io/placeholder/case-opening-demo-client
-    newTag: placeholder
-  - name: auth-service
-    newName: docker.io/placeholder/case-opening-demo-auth-service
-    newTag: placeholder
-  - name: game-service
-    newName: docker.io/placeholder/case-opening-demo-game-service
-    newTag: placeholder
-  - name: admin-service
-    newName: docker.io/placeholder/case-opening-demo-admin-service
-    newTag: placeholder
-  - name: prize-service
-    newName: docker.io/placeholder/case-opening-demo-prize-service
-    newTag: placeholder
+- name: admin-service
+  newName: mosszmossz/case-opening-demo-admin-service
+  newTag: sha-fb67b21
+- name: auth-service
+  newName: mosszmossz/case-opening-demo-auth-service
+  newTag: sha-fb67b21
+- name: client
+  newName: mosszmossz/case-opening-demo-client
+  newTag: sha-fb67b21
+- name: game-service
+  newName: mosszmossz/case-opening-demo-game-service
+  newTag: sha-fb67b21
+- name: prize-service
+  newName: mosszmossz/case-opening-demo-prize-service
+  newTag: sha-fb67b21
