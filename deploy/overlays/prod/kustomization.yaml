@@ -13,16 +13,16 @@ resources:
 images:
 - name: admin-service
   newName: mosszmossz/case-opening-demo-admin-service
-  newTag: sha-2cefb8e
+  newTag: sha-28a990d
 - name: auth-service
   newName: mosszmossz/case-opening-demo-auth-service
-  newTag: sha-2cefb8e
+  newTag: sha-28a990d
 - name: client
   newName: mosszmossz/case-opening-demo-client
-  newTag: sha-2cefb8e
+  newTag: sha-28a990d
 - name: game-service
   newName: mosszmossz/case-opening-demo-game-service
-  newTag: sha-2cefb8e
+  newTag: sha-28a990d
 - name: prize-service
   newName: mosszmossz/case-opening-demo-prize-service
-  newTag: sha-2cefb8e
+  newTag: sha-28a990d
